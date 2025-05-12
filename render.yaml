@@ -1,12 +1,9 @@
 services:
   - type: web
-    name: inceptoai-backend-express
-    env: node
+    name: inceptoai-backend-python
+    env: python
     repo: https://github.com/shantanu-hazra/inceptoAI
     branch: main
-    rootDir: inceptoAI--Backend-Express
-    buildCommand: npm install
-    startCommand: node app.js
-    envVars:
-      - key: PORT
-        value: "8080"
+    rootDir: inceptoAI--Backend-Py
+    buildCommand: pip install -r requirements.txt
+    startCommand: python app.py
