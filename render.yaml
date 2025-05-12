@@ -8,9 +8,5 @@ services:
     buildCommand: npm install
     startCommand: node app.js
     envVars:
-      - key: MONGO_URL
       - key: PORT
-      - key: CLOUDINARY_CLOUD_NAME
-      - key: CLOUDINARY_API_KEY
-      - key: CLOUDINARY_API_KEY_SECRET
-      - key: CLOUDINARY_URL
+        value: "8080"
