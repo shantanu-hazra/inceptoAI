@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: inceptoai-backend-express
+    env: node
+    repo: https://github.com/shantanu-hazra/inceptoAI
+    branch: main
+    rootDir: inceptoAI--Backend-Express
+    buildCommand: npm install
+    startCommand: node app.js
+    envVars:
+      - key: PORT
+        value: "8080"
