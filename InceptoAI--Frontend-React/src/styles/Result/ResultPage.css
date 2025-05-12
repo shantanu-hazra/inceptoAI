@@ -1,0 +1,361 @@
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* Result page container */
+.result-container {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #1e1b4b; /* Dark purple tone like the homepage */
+  color: #ffffff;
+  overflow-y: auto;
+  margin: 0;
+  padding: 0;
+  min-height: calc(100vh - 4rem);
+}
+
+/* Hero section with title */
+.result-hero {
+  padding: 2.5rem 1rem;
+  text-align: center;
+  max-width: 800px;
+  width: 100%;
+}
+
+.result-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.result-subtitle {
+  font-size: 1.1rem;
+  color: #d1d5db;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* File location banner */
+.file-location-banner {
+  display: flex;
+  align-items: center;
+  background: #f0f9ff;
+  border: 1px solid #bae6fd;
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.file-icon {
+  background: #e0f2fe;
+  color: #0284c7;
+  padding: 0.75rem;
+  border-radius: 10px;
+  margin-right: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.file-details {
+  flex: 1;
+}
+
+.file-details h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  color: #0c4a6e;
+}
+
+.file-path {
+  font-family: 'Consolas', 'Monaco', monospace;
+  font-size: 0.9rem;
+  color: #0369a1;
+  background: rgba(0, 0, 0, 0.03);
+  padding: 0.35rem 0.75rem;
+  border-radius: 4px;
+  word-break: break-all;
+}
+
+.download-button {
+  display: flex;
+  align-items: center;
+  background: white;
+  border: 1px solid #0ea5e9;
+  color: #0ea5e9;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-weight: 500;
+  margin-left: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.download-button:hover {
+  background: #0ea5e9;
+  color: white;
+}
+
+.download-button span {
+  margin-left: 0.5rem;
+}
+
+/* Main content area */
+.result-content {
+  background-color: #ffffff;
+  color: #111827;
+  border-radius: 40px 40px 0 0;
+  padding: 3rem 1.5rem;
+  width: 100%;
+  max-width: 1200px;
+  margin-top: -1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+/* Score overview section */
+.score-overview {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.main-score {
+  flex: 1;
+  min-width: 200px;
+  max-width: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to bottom right, #1e1b4b, #3730a3);
+  border-radius: 16px;
+  padding: 2rem;
+  color: white;
+  box-shadow: 0 10px 25px rgba(30, 27, 75, 0.2);
+}
+
+.score-value {
+  font-size: 3.5rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.score-label {
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
+.score-chart {
+  flex: 2;
+  min-width: 300px;
+  background: #f9fafb;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.chart-title {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: #111827;
+  text-align: center;
+}
+
+/* Metrics grid */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+.metric-card {
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.metric-card:hover {
+  border-color: #00bcd4;
+  transform: translateY(-4px);
+}
+
+.metric-icon {
+  padding: 0.75rem;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+}
+
+.blue-icon {
+  background: #dbeafe;
+  color: #2563eb;
+}
+
+.green-icon {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+.purple-icon {
+  background: #ede9fe;
+  color: #7c3aed;
+}
+
+.orange-icon {
+  background: #ffedd5;
+  color: #ea580c;
+}
+
+.metric-details {
+  flex: 1;
+}
+
+.metric-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  color: #4b5563;
+}
+
+.metric-value {
+  font-size: 1.75rem;
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+  color: #111827;
+}
+
+.metric-description {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+/* Improvement areas section */
+.improvement-section {
+  background: #f9fafb;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  color: #111827;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.improvement-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.improvement-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  background: white;
+  border-radius: 8px;
+  border-left: 4px solid #f59e0b;
+}
+
+.improvement-icon {
+  color: #f59e0b;
+  flex-shrink: 0;
+  margin-top: 0.125rem;
+}
+
+/* Action buttons */
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.primary-button {
+  padding: 0.75rem 2rem;
+  background: #00bcd4;
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 188, 212, 0.2);
+}
+
+.primary-button:hover {
+  background: #009db0;
+}
+
+.secondary-button {
+  padding: 0.75rem 2rem;
+  background: white;
+  color: #1e1b4b;
+  font-weight: 600;
+  border: 2px solid #1e1b4b;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.secondary-button:hover {
+  background: #f3f4f6;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .score-overview {
+    flex-direction: column;
+  }
+  
+  .main-score {
+    max-width: 100%;
+  }
+  
+  .action-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .primary-button, .secondary-button {
+    width: 100%;
+  }
+  
+  .result-title {
+    font-size: 2rem;
+  }
+}
