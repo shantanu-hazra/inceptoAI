@@ -9,11 +9,12 @@ python-engineio
 python-socketio
 
 # Machine Learning & Computer Vision
-deepface
 opencv-python-headless
 numpy
+deepface
 tensorflow  
 tf-keras
+fer
 
 # JSON Management and File Storage
 jsonschema  

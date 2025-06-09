@@ -1,4 +1,5 @@
 import { io } from "socket.io-client";
+import axios from "axios";
 
 // Constants
 const SOCKET_SERVER_URL = `${import.meta.env.VITE_REACT_APP_SOCKET_SERVER_URL}`;

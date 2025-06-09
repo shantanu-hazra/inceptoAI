@@ -6,4 +6,4 @@ services:
     branch: main
     rootDir: inceptoAI--Backend-Py
     buildCommand: pip install -r requirements.txt
-    startCommand: python app.py
+    startCommand: python server.py

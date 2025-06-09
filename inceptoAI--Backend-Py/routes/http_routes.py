@@ -255,7 +255,8 @@ def register_http_routes(app):
             if question_number:
                 store.update_emotion_average_results()
                 # Pass the entire data object to have access to question_text
-                store.save_video_analysis_by_question(data)
+                # store.save_video_analysis_by_question(data)
+                store.save_video_analysis_by_question()
             
             if result['status'] == 'success':
                 return jsonify(result)
@@ -500,7 +501,8 @@ def register_http_routes(app):
             
             # Update emotion analysis if available
             store.update_emotion_average_results()
-            store.save_video_analysis_by_question(question_answer_data)
+            # store.save_video_analysis_by_question(question_answer_data)
+            store.save_video_analysis_by_question()
             
             # Check if we should generate a new question (limit to 5 questions)
             if next_question_number <= 5:

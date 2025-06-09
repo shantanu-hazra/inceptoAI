@@ -40,30 +40,6 @@ class SessionDataStore:
         self.logger = logging.getLogger('session_data_store')
         
         # Initialize session data structure
-        # self.session_data = {
-        #     'session_id': session_id,
-        #     'created_at': datetime.now().isoformat(),
-        #     'updated_at': datetime.now().isoformat(),
-        #     'responses': {},
-        #     'speech_analyses': [],
-        #     'emotion_analysis': {
-        #         'average_emotions': {},
-        #         'average_confidence': 0,
-        #         'detailed_emotions': {
-        #             "happy": [],
-        #             "sad": [],
-        #             "angry": [],
-        #             "fear": [],
-        #             "surprise": [],
-        #             "neutral": [],
-        #             "disgust": []
-        #         },
-        #         'confidence_signals': [],
-        #         'eye_contact': [],
-        #         'timestamps': [],
-        #     }
-        # }
-        
         self.session_data = {
             'session_id': session_id,
             'created_at': datetime.now().isoformat(),
@@ -82,8 +58,32 @@ class SessionDataStore:
                     "neutral": [],
                     "disgust": []
                 },
+                'confidence_signals': [],
+                'eye_contact': [],
+                'timestamps': [],
             }
         }
+        
+        # self.session_data = {
+        #     'session_id': session_id,
+        #     'created_at': datetime.now().isoformat(),
+        #     'updated_at': datetime.now().isoformat(),
+        #     'responses': {},
+        #     'speech_analyses': [],
+        #     'emotion_analysis': {
+        #         'average_emotions': {},
+        #         'average_confidence': 0,
+        #         'detailed_emotions': {
+        #             "happy": [],
+        #             "sad": [],
+        #             "angry": [],
+        #             "fear": [],
+        #             "surprise": [],
+        #             "neutral": [],
+        #             "disgust": []
+        #         },
+        #     }
+        # }
         
         # Initialize frame processing components for emotion analysis
         self.is_running = False
@@ -181,6 +181,7 @@ class SessionDataStore:
                     
             # Update the video analysis data
             self.session_data['responses'][question_key]['video_analysis'] = video_analysis_data
+            self.logger.info(video_analysis_data)
             
             # Save to file if requested
             # if save_file:
@@ -549,15 +550,16 @@ class SessionDataStore:
             self.logger.error(f"Error saving average results: {str(e)}")
             return {"error": str(e)}
     
-    def save_video_analysis_by_question(self, data):
+    def save_video_analysis_by_question(self):
         """Summarize and save video analysis data by question number."""
         try:
             # Group frame analysis by question number
             question_analysis = {}
-            # logger.info(data)
             
             # Process emotions
             for emotion, frames in self.session_data["emotion_analysis"]["detailed_emotions"].items():
+                
+                logger.info(frames)
                 for frame_data in frames:
                     question_num = str(frame_data["question"])
                     if question_num not in question_analysis:
