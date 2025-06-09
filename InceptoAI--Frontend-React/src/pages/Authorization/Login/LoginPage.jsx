@@ -100,7 +100,6 @@ const LoginPage = () => {
 
     try {
       const response = await axios.post(loginPath, formData);
-      console.log(response);
 
       if (!response.data || !response.data.id) {
         throw new Error("Invalid response from server");
