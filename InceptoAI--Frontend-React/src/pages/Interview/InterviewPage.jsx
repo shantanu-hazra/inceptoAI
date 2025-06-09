@@ -8,7 +8,7 @@ import useSpeechRecognition from "../../hooks/useSpeechRecognition";
 import useRecordingState from "../../hooks/useRecordingState";
 
 import InterviewInterface from "../../components/InterviewPage/InterviewInterface";
-import SetupForm from "../../components/InterviewPage/SetupForm";
+import SetupForm from "../../components/InterviewPage/setupForm";
 import { useAuth } from "../../contexts/AuthContext/AuthProvider";
 
 const InterviewAssistant = () => {
