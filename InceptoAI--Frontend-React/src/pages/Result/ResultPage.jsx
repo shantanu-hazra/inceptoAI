@@ -151,10 +151,8 @@ const InterviewResultPage = () => {
       <div className="page-wrapper">
         <Navbar />
         <div className="result-container">
-          <div className="loading-spinner">
-            <div className="spinner"></div>
-            <p>Loading interview results...</p>
-          </div>
+          <div className="spinner"></div>
+          <p>Loading interview results...</p>
         </div>
       </div>
     );
@@ -225,7 +223,7 @@ const InterviewResultPage = () => {
 
         <div className="result-content">
           {/* File location information */}
-          <div className="file-location-banner">
+          {/* <div className="file-location-banner">
             <div className="file-icon">
               <FileText size={24} />
             </div>
@@ -237,7 +235,7 @@ const InterviewResultPage = () => {
               <Download size={20} />
               <span>Download</span>
             </button>
-          </div>
+          </div> */}
 
           <div className="score-overview">
             <div className="score-card main-score">

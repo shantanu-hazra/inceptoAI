@@ -109,11 +109,9 @@ const InterviewDetailPage = () => {
     return (
       <div className="page-wrapper">
         <Navbar />
-        <div className="detail-container">
-          <div className="loading-spinner">
-            <div className="spinner"></div>
-            <p>Loading interview details...</p>
-          </div>
+        <div className="result-container">
+          <div className="spinner"></div>
+          <p>Loading interview details...</p>
         </div>
       </div>
     );

@@ -104,8 +104,8 @@ const InterviewResultsTable = ({
 
       {loading ? (
         <div className="loading-container">
-          <div className="loading-spinner"></div>
-          <p className="loading-text">Loading your results...</p>
+          <div className="spinner"></div>
+          <p>Loading interview results...</p>
         </div>
       ) : error ? (
         <div className="error-container">
