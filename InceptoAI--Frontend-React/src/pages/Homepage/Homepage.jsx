@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext/AuthProvider";
 import Navbar from "../../components/Navbar/NavBar.jsx";
 import InterviewResultsTable from "../../components/Homepage/InterviewResultsTable.jsx";
-import "../../styles/Homepage/HomePage.css";
+import "../../styles/Homepage/Homepage.css";
 import axios from "axios";
 import { getAllResult, getResult } from "../../utils/userPaths.js";
 
