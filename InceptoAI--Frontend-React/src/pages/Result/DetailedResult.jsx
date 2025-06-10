@@ -99,8 +99,8 @@ const InterviewDetailPage = () => {
 
   // Calculate score color based on value
   const getScoreColor = (score) => {
-    if (score >= 0.7) return "text-green-600";
-    if (score >= 0.4) return "text-amber-500";
+    if (score >= 7) return "text-green-600";
+    if (score >= 4) return "text-amber-500";
     return "text-red-500";
   };
 
@@ -234,6 +234,29 @@ const InterviewDetailPage = () => {
               </div>
             </div>
 
+            <div className="ai-answer-section">
+              <h2 className="section-title">Better Answer</h2>
+              <div className="ai-answer-box">
+                <p className="answer-text">
+                  {interviewData.evaluation.detail_evaluations[
+                    currentQuestionIndex
+                  ].better_answer || "No better version of the answer provided"}
+                </p>
+                <div className="answer-metadata">
+                  <span className="metadata-item">
+                    <Clock size={16} />
+                    {formatDuration(
+                      currentQuestionData.speech_analysis?.duration || 0
+                    )}
+                  </span>
+                  <span className="metadata-item">
+                    <MessageSquare size={16} />
+                    {currentQuestionData.speech_analysis?.wordCount || 0} words
+                  </span>
+                </div>
+              </div>
+            </div>
+
             <div className="metrics-grid">
               <div className="metric-card">
                 <div className="metric-icon blue-icon">
@@ -288,7 +311,7 @@ const InterviewDetailPage = () => {
                       currentAIEvaluation?.score || 0
                     )}`}
                   >
-                    {(currentAIEvaluation?.score || 0) * 10}/10
+                    {currentAIEvaluation?.score || 0}/10
                   </div>
                   <p className="metric-description">Overall answer quality</p>
                 </div>
@@ -299,13 +322,13 @@ const InterviewDetailPage = () => {
               <h2 className="section-title">AI Analysis</h2>
               <div className="evaluation-content">
                 <div className="evaluation-block">
-                  <h3 className="evaluation-subtitle">Emotional Insight</h3>
+                  <h3 className="evaluation-subtitle">Insight on Confidence</h3>
                   <p className="evaluation-text">
                     {currentAIEvaluation?.emotionalInsight}
                   </p>
                 </div>
 
-                {currentQuestionIndex === 0 &&
+                {currentQuestionIndex >= 0 &&
                   interviewData.evaluation.ai_evaluation
                     .common_improvement_areas && (
                     <div className="evaluation-block">
@@ -328,7 +351,7 @@ const InterviewDetailPage = () => {
                     </div>
                   )}
 
-                {currentQuestionIndex === totalQuestions - 1 &&
+                {currentQuestionIndex <= totalQuestions - 1 &&
                   interviewData.evaluation.ai_evaluation.missing_keywords && (
                     <div className="evaluation-block">
                       <h3 className="evaluation-subtitle">Missing Keywords</h3>

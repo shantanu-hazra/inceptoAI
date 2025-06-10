@@ -246,6 +246,7 @@ class InterviewEvaluator:
         Provide a detailed analysis in this exact JSON format:
         {{
             "answer_score": integer from 0-100,
+            "better_answer": if the answer is below 90 then how can be the question be better answered otherwise return this parameter as "Your answered the question perfectly"., 
             "completeness": integer from 0-100 indicating how completely the question was answered,
             "relevance": integer from 0-100 indicating how relevant the answer was to the question,
             "structure": integer from 0-100 rating the organization and flow of the answer,

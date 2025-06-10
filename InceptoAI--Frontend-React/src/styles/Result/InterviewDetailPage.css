@@ -122,6 +122,13 @@
   border-left: 4px solid #10b981;
 }
 
+.ai-answer-box {
+  background-color: #f9f9f9;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border-left: 4px solid #f59e0b;
+}
+
 .answer-text {
   font-size: 1.1rem;
   line-height: 1.6;
@@ -148,7 +155,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 1rem;
-  margin-bottom: 2rem;
+  margin: 2rem 0 2rem 0;
 }
 
 .metric-card {
@@ -256,11 +263,11 @@
   border-bottom: 1px solid #eee;
 }
 
-.improvement-item:last-child {
+/* .improvement-item:last-child {
   margin-bottom: 0;
   padding-bottom: 0;
   border-bottom: none;
-}
+} */
 
 .improvement-icon {
   color: #f59e0b;

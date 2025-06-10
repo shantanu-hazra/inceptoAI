@@ -1,0 +1,28 @@
+
+[
+  {
+    "id": 1,
+    "text": "Tell me about a challenge you faced in your previous job and how you overcame it.",
+    "category": "experience"
+  },
+  {
+    "id": 2,
+    "text": "How do you handle stress and pressure?",
+    "category": "personality"
+  },
+  {
+    "id": 3,
+    "text": "Where do you see yourself in 5 years?",
+    "category": "career"
+  },
+  {
+    "id": 4,
+    "text": "Describe a situation where you had to solve a complex problem.",
+    "category": "problem-solving"
+  },
+  {
+    "id": 5,
+    "text": "What are your strengths and weaknesses?",
+    "category": "self-awareness"
+  }
+]

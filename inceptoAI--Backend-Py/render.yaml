@@ -1,9 +1,0 @@
-services:
-  - type: web
-    name: inceptoai-backend-python
-    env: python
-    repo: https://github.com/shantanu-hazra/inceptoAI
-    branch: main
-    rootDir: inceptoAI--Backend-Py
-    buildCommand: pip install -r requirements.txt
-    startCommand: python server.py

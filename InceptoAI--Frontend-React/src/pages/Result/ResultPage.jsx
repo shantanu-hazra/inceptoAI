@@ -99,23 +99,22 @@ const InterviewResultPage = () => {
       },
       {
         name: "Answer Quality",
-        score: interviewData.evaluation.answer_quality.overall_quality,
+        score: interviewData.evaluation.answer_quality.overall_quality * 10,
         fill: "#FFC107",
       },
       {
         name: "Completeness",
-        score:
-          interviewData.evaluation.ai_evaluation.average_completeness * 100,
+        score: interviewData.evaluation.ai_evaluation.average_completeness * 10,
         fill: "#2196F3",
       },
       {
         name: "Relevance",
-        score: interviewData.evaluation.ai_evaluation.average_relevance * 100,
+        score: interviewData.evaluation.ai_evaluation.average_relevance * 10,
         fill: "#4CAF50",
       },
       {
         name: "Structure",
-        score: interviewData.evaluation.ai_evaluation.average_structure * 100,
+        score: interviewData.evaluation.ai_evaluation.average_structure * 10,
         fill: "#9C27B0",
       },
     ];

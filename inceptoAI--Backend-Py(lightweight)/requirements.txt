@@ -1,0 +1,38 @@
+# Web Framework
+Flask
+flask-socketio
+flask-cors
+asgiref
+
+# Socket Communication (optional if only using flask-socketio)
+python-engineio
+python-socketio
+
+# Machine Learning & Computer Vision
+opencv-python-headless
+numpy
+
+# JSON Management and File Storage
+jsonschema  
+
+# Datetime Handling
+python-dateutil
+
+# Logging
+structlog
+
+# Performing actions
+tenacity
+asyncio
+typing
+eventlet
+
+# Environment Variables
+python-dotenv
+
+# For Development/Testing
+pytest
+
+# Gemini
+langchain_google_genai
+python-decouple
