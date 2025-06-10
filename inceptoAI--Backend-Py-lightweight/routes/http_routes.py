@@ -9,6 +9,8 @@ from utils.questions import load_questions
 from models.question_generator import QuestionGenerator
 from flask import jsonify, request, current_app
 
+from decouple import config as env_config
+
 
 def register_http_routes(app):
     @app.route('/status')
@@ -563,7 +565,7 @@ def register_http_routes(app):
             # Step 2: Send the evaluated data to the other endpoint
             
                         
-            target_api_url = "http://localhost:3000/api/users/interview/complete/"
+            target_api_url = env_config("EXPRESS_BACKEND_API_COMPLETE_INTERVIEW")
             api_response = None
             api_success = False
             
