@@ -213,9 +213,9 @@ const SignupPage = () => {
 
         <div className="divider">or</div>
 
-        <button type="button" className="google-button">
+        {/* <button type="button" className="google-button">
           Sign up with Google
-        </button>
+        </button> */}
 
         <p className="login-prompt">
           Already have an account?{" "}
