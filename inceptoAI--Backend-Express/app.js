@@ -46,7 +46,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL || process.env.PYTHON_BACKEND_URL,
+    origin:
+      process.env.FRONTEND_URL1 ||
+      process.env.FRONTEND_URL2 ||
+      process.env.PYTHON_BACKEND_URL,
     credentials: true,
   })
 );
