@@ -19,7 +19,7 @@ const InterviewResultsTable = ({
     const seconds = Math.floor(durationSeconds % 60);
     return `${minutes}:${seconds.toString().padStart(2, "0")}`;
   }
-
+  console.log(interviewResults);
   // Get status badge based on completion status
   function getStatusBadge(status) {
     switch (status) {
