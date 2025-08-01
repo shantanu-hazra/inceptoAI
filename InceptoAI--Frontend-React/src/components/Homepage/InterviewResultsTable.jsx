@@ -68,7 +68,7 @@ const InterviewResultsTable = ({
                   {interviewResults.length > 0
                     ? Math.ceil(
                         interviewResults.reduce(
-                          (sum, result) => sum + (result.overallScore || 0),
+                          (sum, result) => sum + (result.overall_Score || 0),
                           0
                         ) / interviewResults.length
                       ) + "%"
