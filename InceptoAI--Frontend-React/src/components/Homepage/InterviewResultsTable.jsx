@@ -88,7 +88,8 @@ const InterviewResultsTable = ({
                     ? formatDuration(
                         Math.ceil(
                           interviewResults.reduce(
-                            (sum, result) => sum + (result.duration || 0),
+                            (sum, result) =>
+                              sum + (result.interview_duration_seconds || 0),
                             0
                           ) / interviewResults.length
                         )
