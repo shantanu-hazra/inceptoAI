@@ -1,100 +1,78 @@
-Incepto AI
+# Incepto AI  
 
-Incepto AI is an AI-powered mock interview assistant that helps candidates practice and improve their interview skills. It integrates question generation, speech analysis, and emotion/confidence detection into one seamless platform.
+Incepto AI is an **AI-powered interview preparation platform** that helps candidates practice mock interviews, receive real-time feedback, and analyze their performance across multiple dimensions. It integrates question generation, emotion/speech analysis, and result reporting into a seamless user experience.  
 
-🔗 Live Project: https://incepto-ai.vercel.app/
+---
+
+## 🚀 Features  
+
+- **Smart Question Generation** – Dynamically fetches and curates questions based on company, role, or random selection.  
+- **AI-Powered Analysis** – Evaluates candidate responses using speech patterns, filler words, confidence, and emotional cues.  
+- **Video + Audio Insights** – Processes camera frames and recorded audio to measure both verbal and non-verbal performance.  
+- **Comprehensive Reports** – Generates a detailed breakdown of candidate performance after each session.  
+- **Admin Controls** – Manage question sets, configurations, and system behavior.  
+- **Modern Web Interface** – Built with React for a smooth, user-friendly experience.  
+
+---
+
+## 🛠 Tech Stack  
+
+- **Frontend**: React.js (Vercel hosting)  
+- **Backend**: Node.js (Express), Python (Flask for ML/AI analysis, hosted on Render)  
+- **Database**: MongoDB (Atlas / Compass)  
+- **File Storage**: Cloudinary (for report storage and multimedia handling)  
+
+---
+
+## 📂 Project Workflow  
+
+1. **Candidate starts a mock interview** via the React frontend.  
+2. **Backend fetches interview questions** (based on company or random selection).  
+3. **Frontend reads questions aloud** and records candidate’s response (video + audio).  
+4. **Video frames** are streamed to the backend → analyzed for **emotions & confidence**.  
+5. **Audio is processed** using ML models (via Flask) → analyzing **speech clarity, filler words, and WPM**.  
+6. **Evaluation results** for each question are stored in MongoDB.  
+7. **Final report** is generated and shown in a clean, user-friendly UI.  
+
+---
+
+## 📌 API Endpoints  
+
+### 🔹 Question Management  
+- `GET /api/questions/random` → Fetch random questions.  
+- `GET /api/questions/company/:company` → Fetch company-specific questions.  
+
+### 🔹 Interview Flow  
+- `POST /api/interview/start` → Start a new interview session.  
+- `POST /api/interview/answer` → Submit answer (audio + metadata).  
+- `POST /api/interview/frame` → Send video frame for analysis.  
+- `POST /api/interview/end` → End session and generate cumulative report.  
+
+### 🔹 Reports  
+- `GET /api/report/:sessionId` → Fetch the detailed report of a completed interview.  
+
+---
+
+## 📸 Screenshots  
+
+/assets/screenshots/
+```yaml
+├── home.png
+
+├── interview.png
+
+├── report.png
+```
+
+---
+
+## ⚡️ How It Works  
+
+Incepto AI follows an **API-first architecture**, ensuring the backend and AI analysis services are reusable and extendable. The **Node.js Express server** manages interview flow and communication, while the **Flask backend** performs deep audio/video analysis. All results are stored in MongoDB and presented via a modern **React.js frontend**.  
+
+---
 
 
-✨ Features
 
-1. Dynamic Questioning
+(Add screenshots of **home page, mock interview screen, and result report**)  
 
-    Choose company-specific or random questions.
-
-    Next question adapts based on previous answers.
-
-2. Interview Simulation
-
-    Real-time video streaming for emotion/confidence analysis.
-
-    Voice input for speech clarity, filler word detection, and sentiment.
-
-    Automatic flow between questions and answers.
-
-3. Performance Insights
-
-    Emotion & confidence tracking throughout the session.
-
-    Speech quality analysis (clarity, pauses, pace).
-
-    Final detailed report with recommendations.
-
-
-🛠️ Tech Stack
-
-1. Frontend
-
-    React.js (Vite)
-
-    Tailwind CSS + ShadCN UI
-
-2. Backend
-
-    Node.js + Express.js (interview flow, API routes)
-
-    Flask (Python) – emotion & speech analysis models
-
-3. Database & Storage
-
-    MongoDB (Atlas) – sessions, questions, analytics
-
-    Cloudinary – file & report storage
-
-4. Deployment
-
-    Render (Express & Flask backends)
-
-    Vercel (React frontend)
-
-
-🔄 Working
-
-1. Choose Interview Mode
-
-    User selects either a company-specific interview (e.g., Google, Microsoft) or a general practice session.
-
-2. Question Presented
-
-    The server sends a question → frontend reads it aloud to the candidate.
-
-4. Answering Phase
-
-    User responds verbally while the camera streams frames for emotion/confidence tracking.
-
-    Microphone input is recorded for speech clarity and filler word detection.
-
-5. AI Analysis
-
-    Flask backend analyzes the user’s emotion, confidence, and speech quality.
-
-    Express backend manages question flow and stores session data in MongoDB.
-
-6. Report Generation
-
-    After all questions, a cumulative report is created.
-
-    Report includes:
-    
-    Confidence trends across answers
-    
-    Speech clarity and filler word usage
-    
-    Strengths & weaknesses summary
-
-7. Feedback Displayed
-    
-    User views a results dashboard with charts and improvement suggestions.
-    
-    Reports are stored in Cloudinary for secure access.
-
-   
