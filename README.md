@@ -59,7 +59,7 @@ Incepto AI is an **AI-powered interview preparation platform** that helps candid
   ![Home Page](./screenshots/Homepage.png)
 
 - **Interview Page**
-  ![Interview Page](./screenshots/Interterview.png)
+  ![Interview Page](./screenshots/Interview.png)
   
 - **Analysis Results**  
   ![Analysis Results](./screenshots/Result1.png)
