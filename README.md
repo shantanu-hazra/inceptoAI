@@ -57,6 +57,7 @@ Incepto AI is an **AI-powered interview preparation platform** that helps candid
 
 /assets/screenshots/
 ```yaml
+/assets/screenshots/
 ├── home.png
 
 ├── interview.png
@@ -72,7 +73,4 @@ Incepto AI follows an **API-first architecture**, ensuring the backend and AI an
 
 ---
 
-
-
-(Add screenshots of **home page, mock interview screen, and result report**)  
 
