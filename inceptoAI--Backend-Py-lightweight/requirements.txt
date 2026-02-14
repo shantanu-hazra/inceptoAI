@@ -36,3 +36,6 @@ pytest
 # Gemini
 langchain_google_genai
 python-decouple
+
+#Groq
+groq 

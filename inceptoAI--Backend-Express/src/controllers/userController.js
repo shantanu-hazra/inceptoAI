@@ -94,6 +94,8 @@ export const uploadResult = async (req, res) => {
         ? "completed"
         : "abandoned";
 
+    console.log(interviewResult);
+
     // Check if any required field is missing
     if (!session_id || !role || !user_id || !overallScore || !duration) {
       return res.status(400).json({
@@ -102,7 +104,9 @@ export const uploadResult = async (req, res) => {
         received: {
           session_id: session_id || "(missing)",
           role: role || "(missing)",
+          overallScore: overallScore || "(missing)",
           user_id: user_id || "(missing)",
+          duration: duration || "(missing)",
         },
       });
     }
@@ -146,7 +150,7 @@ export const uploadResult = async (req, res) => {
       const updatedUser = await User.findByIdAndUpdate(
         user_id,
         { $push: { results: savedResult._id } },
-        { new: true }
+        { new: true },
       );
     } catch (userError) {
       console.error("Error updating user:", userError.message);

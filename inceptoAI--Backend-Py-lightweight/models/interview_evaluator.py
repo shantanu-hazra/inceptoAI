@@ -7,6 +7,8 @@ from decouple import config
 import json
 import logging
 
+from utils.ext_api import Ext_Api
+
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
@@ -15,14 +17,12 @@ class InterviewEvaluator:
     
     def __init__(self, llm=None):
         try:
-            api_key = config("GOOGLE_GEMINI_API_KEY")
-            model_name = config("GOOGLE_GEMINI_MODEL_NAME")
-            self.llm = llm or ChatGoogleGenerativeAI(model=model_name, google_api_key=api_key)
+            self.ext_api=Ext_Api()
+            
             logger.info("InterviewEvaluator initialized successfully")
         except Exception as e:
             logger.error(f"Error initializing InterviewEvaluator: {str(e)}")
             # Set a fallback or raise exception based on your needs
-            self.llm = None
     
     """Evaluates interview data and provides comprehensive metrics"""
     
@@ -261,17 +261,12 @@ class InterviewEvaluator:
         Ensure your response is ONLY the valid JSON object and nothing else.
         """
         
-        try:
-            if not self.llm:
-                raise ValueError("LLM is not initialized")
-                
-            response = self.llm.invoke(prompt)
-            
-            # Log the response for debugging
-            logger.debug(f"Raw LLM response: {response.content}")
-            
+        try:                
+            # response = self.llm.invoke(prompt)
+            response = await self.ext_api.groq_api(prompt)
+
             # Extract JSON from response - handle potential formatting issues
-            json_str = response.content.strip()
+            json_str = response.strip()
             
             # Remove any markdown code block indicators if present
             if json_str.startswith("```json"):

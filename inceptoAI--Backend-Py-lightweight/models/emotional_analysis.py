@@ -3,10 +3,16 @@ import numpy as np
 
 class LightweightEmotionDetector:
     def __init__(self):
-        # Initialize only essential cascade classifiers
-        self.face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
+        # Try alternative cascade - often more reliable
+        try:
+            self.face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_alt2.xml')
+        except:
+            self.face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
+            
         self.smile_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_smile.xml')
-        # Skip eye cascade to save memory if not essential
+        
+        if self.face_cascade.empty():
+            raise Exception("Failed to load face cascade!")
         
     def analyze_facial_features(self, face_region):
         """Memory-efficient facial feature analysis"""

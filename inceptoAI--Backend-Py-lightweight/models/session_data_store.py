@@ -1,5 +1,6 @@
 import os
 import json
+import cv2
 import time
 import logging
 import threading
@@ -38,6 +39,8 @@ class SessionDataStore:
         self.session_id = session_id
         self.logger = logging.getLogger('session_data_store')
         
+        self.emotion_detector = LightweightEmotionDetector()
+        
         # Initialize session data structure
         self.session_data = {
             'session_id': session_id,
@@ -62,27 +65,6 @@ class SessionDataStore:
                 'timestamps': [],
             }
         }
-        
-        # self.session_data = {
-        #     'session_id': session_id,
-        #     'created_at': datetime.now().isoformat(),
-        #     'updated_at': datetime.now().isoformat(),
-        #     'responses': {},
-        #     'speech_analyses': [],
-        #     'emotion_analysis': {
-        #         'average_emotions': {},
-        #         'average_confidence': 0,
-        #         'detailed_emotions': {
-        #             "happy": [],
-        #             "sad": [],
-        #             "angry": [],
-        #             "fear": [],
-        #             "surprise": [],
-        #             "neutral": [],
-        #             "disgust": []
-        #         },
-        #     }
-        # }
         
         # Initialize frame processing components for emotion analysis
         self.is_running = False
@@ -115,19 +97,6 @@ class SessionDataStore:
             # Get video analysis data from the data parameter or existing data
             video_analysis = data.get('videoAnalysis') or data.get('video_analysis') or existing_data.get('video_analysis', {})
             
-            # If video_analysis data is not provided in the data parameter,
-            # check if it can be extracted from the video frames for this question
-            if not video_analysis:
-                # Attempt to get video analysis data for this question from frames
-                try:
-                    # This assumes there's a method to get video analysis from frames
-                    # that were already captured for this question
-                    video_analysis = self.get_video_analysis_for_question(question_number)
-                    if video_analysis:
-                        self.logger.info(f"Retrieved video analysis for question {question_number}")
-                except Exception as video_err:
-                    self.logger.warning(f"Could not retrieve video analysis: {str(video_err)}")
-            
             # Format the data, including any video_analysis we found
             formatted_data = {
                 'question_number': question_number,
@@ -146,7 +115,6 @@ class SessionDataStore:
             return {
                 'status': 'success',
                 'message': f'Response saved successfully to session file',
-                'session_file': self.session_file_path
             }
             
         except Exception as e:
@@ -229,6 +197,32 @@ class SessionDataStore:
                 'message': error_msg
             }
     
+    def get_all_questions(self):
+        """Get all questions that have been asked in this session."""
+        try:
+            questions = []
+            
+            for q_num, response in self.session_data['responses'].items():
+                questions.append({
+                    'question_number': response.get('question_number'),
+                    'question_text': response.get('question_text')
+                })
+            
+            # Sort by question number
+            questions.sort(key=lambda x: int(x.get('question_number', 0)))
+            
+            return {
+                'status': 'success',
+                'questions': questions
+            }
+            
+        except Exception as e:
+            error_msg = f"Error retrieving questions: {str(e)}"
+            self.logger.error(error_msg)
+            return {
+                'status': 'error',
+                'message': error_msg
+            }
     # ========== Speech Analysis Methods ==========
     
     def save_speech_analysis(self, analysis_data, client_id=None):
@@ -269,9 +263,6 @@ class SessionDataStore:
                         'speech_analysis': analysis_data,
                         'video_analysis': {}
                     }
-            
-            # Save to file
-            # self._save_to_file()
             
             self.logger.info(f"Saved speech analysis with ID {analysis_id}")
             
@@ -404,49 +395,68 @@ class SessionDataStore:
             else:
                 frame = frame_data
                 
-            if frame is None:
-                self.logger.warning(f"Could not decode frame: {frame_id}")
+            if frame is None or frame.size == 0:
+                self.logger.warning(f"Invalid frame: {frame_id}")
                 return
             
-            # Resize frame if too large to save memory
+            # Resize frame if too large
             height, width = frame.shape[:2]
-            if width > 640:  # Limit processing to reasonable size
+            if width > 640:
                 scale = 640 / width
                 new_width = int(width * scale)
                 new_height = int(height * scale)
                 frame = cv2.resize(frame, (new_width, new_height))
             
-            # Convert to grayscale (saves memory)
+            # Convert to grayscale
             gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
             
-            # Release original frame from memory
+            # Release original frame
             del frame
             
-            # Detect faces with optimized parameters
-            faces = emotion_detector.face_cascade.detectMultiScale(
+            # Enhance contrast for better detection
+            gray = cv2.equalizeHist(gray)
+            
+            # RELAXED detection parameters
+            faces = self.emotion_detector.face_cascade.detectMultiScale(
                 gray, 
-                scaleFactor=1.3, 
-                minNeighbors=5,
-                minSize=(30, 30),
-                maxSize=(300, 300)  # Limit max size for efficiency
+                scaleFactor=1.05,     # Very sensitive
+                minNeighbors=2,       # Low threshold
+                minSize=(20, 20),     # Small faces OK
+                flags=cv2.CASCADE_SCALE_IMAGE
             )
             
             if len(faces) == 0:
+                # Try even more relaxed parameters as fallback
+                faces = self.emotion_detector.face_cascade.detectMultiScale(
+                    gray,
+                    scaleFactor=1.1,
+                    minNeighbors=1,
+                    minSize=(15, 15)
+                )
+            
+            if len(faces) == 0:
                 print(f"No faces detected in frame: {frame_id}")
-                # Clean up memory
                 del gray
-                gc.collect()  # Force garbage collection
+                gc.collect()
                 return
             
-            # Process only the first (largest) face
+            print(f"Frame {frame_id}: Found {len(faces)} face(s)")
+            
+            # Process only the largest face
+            if len(faces) > 1:
+                faces = sorted(faces, key=lambda f: f[2] * f[3], reverse=True)
+            
             (x, y, w, h) = faces[0]
             face_region = gray[y:y+h, x:x+w]
+            
+            # ... rest of your code ...
             
             # Release gray image from memory
             del gray
             
             # Analyze emotions
-            emotions_dict = emotion_detector.analyze_facial_features(face_region)
+            # ← FIX: Use self.emotion_detector
+            emotions_dict = self.emotion_detector.analyze_facial_features(face_region)
             emotions = {emotion: float(score) for emotion, score in emotions_dict.items()}
             
             # Release face region from memory
@@ -461,19 +471,46 @@ class SessionDataStore:
             )
             confidence_value = float(max(0, min(100, confidence)))
             
-            # Debug output
-            print(f"[{frame_id}] Emotions: {emotions}, Confidence: {confidence_value:.2f}")
+            # ← ADD: STORE THE RESULTS
+            timestamp = datetime.now().isoformat()
             
-            # Force garbage collection every 10 frames to prevent memory buildup
+            # Add to detailed emotions (matching your data structure)
+            for emotion, value in emotions.items():
+                if emotion in self.session_data['emotion_analysis']['detailed_emotions']:
+                    self.session_data['emotion_analysis']['detailed_emotions'][emotion].append({
+                        'value': value,
+                        'question': question_number,
+                        'frame_id': frame_id,
+                        'timestamp': timestamp
+                    })
+            
+            # Add confidence signal
+            self.session_data['emotion_analysis']['confidence_signals'].append({
+                'value': confidence_value,
+                'question': question_number,
+                'frame_id': frame_id,
+                'timestamp': timestamp
+            })
+            
+            # Add timestamp
+            self.session_data['emotion_analysis']['timestamps'].append({
+                'frame_id': frame_id,
+                'question': question_number,
+                'timestamp': timestamp
+            })
+            
+            # Debug output
+            print(f"[{frame_id}] Q{question_number} - Emotions: {emotions}, Confidence: {confidence_value:.2f}")
+            
+            # Force garbage collection every 10 frames
             if int(frame_id) % 10 == 0:
                 gc.collect()
                 
         except Exception as e:
             self.logger.error(f"Error processing frame {frame_id}: {str(e)}")
-            # Clean up on error
             gc.collect()
             print(f"ERROR processing frame {frame_id}: {str(e)}")
-    
+
     def update_emotion_analysis(self, analysis_results, save_file=True):
         """Update the emotion analysis data in the session file."""
         try:
@@ -498,12 +535,7 @@ class SessionDataStore:
                 if confidence_values:
                     avg_confidence = sum(item["value"] for item in confidence_values) / len(confidence_values)
                     self.session_data['emotion_analysis']['average_confidence'] = avg_confidence
-                    
-            
-            # Save to file if requested
-            # if save_file:
-                # self._save_to_file()
-                
+                            
             return {
                 'status': 'success',
                 'message': 'Emotion analysis updated successfully'
@@ -541,10 +573,7 @@ class SessionDataStore:
             # Update the session data with this average data
             self.session_data["emotion_analysis"]["average_emotions"] = avg_emotions
             self.session_data["emotion_analysis"]["average_confidence"] = avg_confidence
-            
-            # Save to file
-            # self._save_to_file()
-            
+                        
             return {
                 "emotions": avg_emotions,
                 "confidence": avg_confidence,
@@ -565,7 +594,6 @@ class SessionDataStore:
             # Process emotions
             for emotion, frames in self.session_data["emotion_analysis"]["detailed_emotions"].items():
                 
-                logger.info(frames)
                 for frame_data in frames:
                     question_num = str(frame_data["question"])
                     if question_num not in question_analysis:
@@ -612,13 +640,16 @@ class SessionDataStore:
                 if "confidence_values" in analysis_data and analysis_data["confidence_values"]:
                     video_analysis["average_confidence"] = sum(analysis_data["confidence_values"]) / len(analysis_data["confidence_values"])
                 
+                existing_response = self.session_data['responses'].get(question_num, {})
+                
+                data = {
+                'question_text': existing_response.get('question_text', f"Question {question_num}"),
+                'question_number': int(question_num)
+                }
                 # Update the question with this video analysis
                 self.update_video_analysis(question_num, video_analysis, data, save_file=False)
                 
                 self.logger.info(f"Updated video analysis for question {question_num}")
-            
-            # Save to file after all updates
-            # self._save_to_file()
             
             return {
                 "status": "success",
@@ -631,21 +662,5 @@ class SessionDataStore:
             return {
                 "status": "error",
                 "message": error_msg
-            }
-            
-    def get_video_analysis_for_question(self, question_number):
-        """
-        Get video analysis data for a specific question from stored frames
-        or other sources.
-        
-        Returns: 
-            dict: Video analysis data or empty dict if none available
-        """
-        try:
-
-            return {}
-        except Exception as e:
-            self.logger.error(f"Error getting video analysis for question {question_number}: {str(e)}")
-            return {}
-        
+            }   
     
