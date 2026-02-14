@@ -440,7 +440,7 @@ class InterviewEvaluator:
         
         # Comprehensive evaluation report
         comprehensive_report = {
-            "overall_score": min(100, max(0, overall_score)),
+            "overall_score": min(10, max(0, overall_score/10)),
             "emotion_metrics": emotion_metrics,
             "answer_quality": answer_quality,
             "keywords_usage": keywords_usage,
