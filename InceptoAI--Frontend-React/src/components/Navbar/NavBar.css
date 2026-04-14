@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.navbar {
+  width: 100%;
+  background-color: #FFFFFF; /* Pure white flat background */
+  color: #111827;
+  padding: 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  height: 5rem; /* slightly taller for bold design */
+  border-bottom: 4px solid #111827; /* Strict flat design separator */
+  font-family: 'Outfit', sans-serif;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 0 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.navbar-left,
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+.nav-item {
+  margin: 0 0.5rem;
+}
+
+.nav-link {
+  color: #4B5563; /* Gray 600 */
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 800; /* Bold */
+  text-transform: uppercase;
+  transition: color 0.1s ease, transform 0.1s ease;
+  padding: 0.5rem 1rem;
+  display: inline-block;
+}
+
+.nav-link:hover, .nav-link.active {
+  color: #111827;
+  transform: scale(1.05); /* Snappy scale */
+}
+
+/* Visual indicator for active */
+.nav-link.active {
+  background-color: #111827;
+  color: #FFFFFF;
+  border-radius: 4px;
+}
+
+.nav-link.active:hover {
+  color: #FFFFFF;
+}
+
+.logo-text {
+  font-weight: 800;
+  font-size: 1.75rem;
+  color: #111827; /* Solid black/gray900 */
+  text-decoration: none;
+  letter-spacing: -0.05em;
+  margin-right: 2rem;
+  transition: transform 0.1s ease;
+  display: inline-block;
+  text-transform: uppercase;
+}
+
+.logo-text:hover {
+  transform: scale(1.05);
+}
+
+.auth-button {
+  background-color: #3B82F6; /* Primary solid blue */
+  color: #FFFFFF;
+  padding: 0.75rem 1.5rem;
+  border: 4px solid #111827;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  font-family: 'Outfit', sans-serif;
+  transition: transform 0.1s ease, background-color 0.1s ease;
+}
+
+.auth-button:hover {
+  background-color: #2563EB;
+  transform: scale(1.05); /* Snappy scale */
+}
