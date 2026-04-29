@@ -53,8 +53,8 @@ const InterviewDetailPage = () => {
     setCurrentQuestionIndex((prevIndex) =>
       Math.min(
         Object.keys(interviewData?.responses || {}).length - 1,
-        prevIndex + 1,
-      ),
+        prevIndex + 1
+      )
     );
   };
 
@@ -223,7 +223,7 @@ const InterviewDetailPage = () => {
                   <span className="metadata-item">
                     <Clock size={16} />
                     {formatDuration(
-                      currentQuestionData.speech_analysis?.duration || 0,
+                      currentQuestionData.speech_analysis?.duration || 0
                     )}
                   </span>
                   <span className="metadata-item">
@@ -238,16 +238,15 @@ const InterviewDetailPage = () => {
               <h2 className="section-title">Better Answer</h2>
               <div className="ai-answer-box">
                 <p className="answer-text">
-                  {interviewData?.evaluation?.detail_evaluations?.[
+                  {interviewData.evaluation.detail_evaluations[
                     currentQuestionIndex
-                  ]?.better_answer ||
-                    "No better version of the answer provided"}
+                  ].better_answer || "No better version of the answer provided"}
                 </p>
                 <div className="answer-metadata">
                   <span className="metadata-item">
                     <Clock size={16} />
                     {formatDuration(
-                      currentQuestionData.speech_analysis?.duration || 0,
+                      currentQuestionData.speech_analysis?.duration || 0
                     )}
                   </span>
                   <span className="metadata-item">
@@ -293,7 +292,7 @@ const InterviewDetailPage = () => {
                   <h3 className="metric-title">Completeness</h3>
                   <div className="metric-value">
                     {currentQuestionData.speech_analysis?.completeness.toFixed(
-                      1,
+                      1
                     ) || 0}
                     %
                   </div>
@@ -309,7 +308,7 @@ const InterviewDetailPage = () => {
                   <h3 className="metric-title">AI Score</h3>
                   <div
                     className={`metric-value ${getScoreColor(
-                      currentAIEvaluation?.score || 0,
+                      currentAIEvaluation?.score || 0
                     )}`}
                   >
                     {currentAIEvaluation?.score || 0}/10
@@ -346,7 +345,7 @@ const InterviewDetailPage = () => {
                               />
                               <span>{area}</span>
                             </li>
-                          ),
+                          )
                         )}
                       </ul>
                     </div>
@@ -362,7 +361,7 @@ const InterviewDetailPage = () => {
                             <span key={index} className="keyword-badge">
                               {keyword}
                             </span>
-                          ),
+                          )
                         )}
                       </div>
                     </div>
