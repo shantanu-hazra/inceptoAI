@@ -10,17 +10,11 @@ const companies = [
   "Tesla",
   "Uber",
   "Airbnb",
-  "Twitter",
-  "LinkedIn",
-  "Spotify",
+  "Twitter / X",
   "Stripe",
-  "Shopify",
+  "Spotify",
   "Salesforce",
-  "Oracle",
-  "IBM",
-  "Intel",
   "Adobe",
-  "Nvidia",
 ];
 
 const SetupForm = ({

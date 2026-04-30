@@ -324,16 +324,16 @@ const InterviewResultPage = () => {
             </div>
           </div>
 
-          <div className="improvement-section">
+          <div className="result-improvement-section">
             <div className="section-header">
               <List size={24} />
               <h3>Areas for Improvement</h3>
             </div>
-            <ul className="improvement-list">
+            <ul className="result-improvement-list">
               {interviewData.evaluation.ai_evaluation.common_improvement_areas.map(
                 (area, index) => (
-                  <li key={index} className="improvement-item">
-                    <AlertTriangle size={20} className="improvement-icon" />
+                  <li key={index} className="result-improvement-item">
+                    <AlertTriangle size={20} className="result-improvement-icon" />
                     <span>{area}</span>
                   </li>
                 )
