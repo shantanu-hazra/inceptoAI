@@ -8,6 +8,8 @@ import session from "express-session";
 import dotenv from "dotenv";
 import { createServer } from "http";
 import userRoutes from "./src/routers/userRoutes.js";
+import questionRoutes from "./src/routers/questionRoutes.js";
+
 
 const app = express();
 dotenv.config();
