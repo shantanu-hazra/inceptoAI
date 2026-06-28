@@ -10,11 +10,40 @@ const companies = [
   "Tesla",
   "Uber",
   "Airbnb",
-  "Twitter / X",
-  "Stripe",
+  "Twitter",
+  "LinkedIn",
   "Spotify",
+  "Stripe",
+  "Shopify",
   "Salesforce",
+  "Oracle",
+  "IBM",
+  "Intel",
   "Adobe",
+  "Nvidia",
+];
+
+const roles = [
+  "Software Engineer",
+  "Frontend Engineer",
+  "Backend Engineer",
+  "Full Stack Engineer",
+  "DevOps Engineer",
+  "Machine Learning Engineer",
+  "Data Scientist",
+  "Data Analyst",
+  "Product Manager",
+  "Product Designer",
+  "UX Designer",
+  "UI Designer",
+  "QA Engineer",
+  "Site Reliability Engineer",
+  "Cloud Engineer",
+  "Security Engineer",
+  "Mobile Engineer (iOS)",
+  "Mobile Engineer (Android)",
+  "Engineering Manager",
+  "Business Analyst",
 ];
 
 const SetupForm = ({
@@ -65,15 +94,22 @@ const SetupForm = ({
                 Job Role
               </label>
               <div>
-                <input
+                <select
                   id="role"
-                  type="text"
                   value={role}
                   onChange={(e) => setRole(e.target.value)}
-                  placeholder="e.g., Software Engineer, Product Manager"
                   className="form-input"
                   required
-                />
+                >
+                  <option value="" disabled>
+                    Select a role
+                  </option>
+                  {roles.map((name) => (
+                    <option key={name} value={name}>
+                      {name}
+                    </option>
+                  ))}
+                </select>
               </div>
             </div>
 
