@@ -83,6 +83,7 @@ passport.deserializeUser(userSchema.deserializeUser());
 
 // Authentication routes
 app.use("/api/users", userRoutes);
+app.use("/api/questions", questionRoutes);
 
 const server = createServer(app);
 
